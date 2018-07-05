@@ -3,17 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
+import First from './pages/first_page/First';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
-          <Route path='/' exact render={
-            () => {
-              return (<h1>This is the router</h1>)
-            }
-          }/>
+          <Route path='/' exact component={First} />
 
           <Route path='/about' exact render={
             () => {
