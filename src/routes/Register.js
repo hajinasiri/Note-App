@@ -4,8 +4,7 @@ export default class Register extends React.Component {
   state = {
     username:'',
     email:'',
-    password:'',
-    isAdmin:false
+    password:''
   }
 
   onChange = (e) => {
@@ -23,7 +22,8 @@ export default class Register extends React.Component {
         <input name='username' placeholder='Username' onChange={e => this.onChange(e)} value={this.state.username}/>
         <input name='email' placeholder='Email' onChange={e => this.onChange(e)} value={this.state.email} />
         <input name='password' placeholder='Password' type='password' onChange={e => this.onChange(e)} value={this.state.password} />
-        <button onClick={() => this.onSubmit()} type='primary' > Primary </button>
+        <br/>
+        <button onClick={() => this.onSubmit()} type='primary' > Submit </button>
       </div>
     )
   }
