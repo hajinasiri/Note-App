@@ -15,8 +15,11 @@ class Register extends React.Component {
     })
   }
 
-  onSubmit = () => {
-
+  onSubmit = async () => {
+    const response = await this.props.mutate({
+      variables: this.state,
+    });
+    console.log(response);
   }
   render() {
     return (
@@ -39,5 +42,6 @@ mutation($username: String!, $email: String!, $password: String!, $isAdmin: Bool
   }
 }
 `;
+
 
 export default graphql(mutation)(Register);
