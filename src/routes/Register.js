@@ -1,6 +1,8 @@
 import React from 'react';
+import gql from 'graphql-tag';
+import {graphql} from 'react-apollo';
 
-export default class Register extends React.Component {
+class Register extends React.Component {
   state = {
     username:'',
     email:'',
@@ -29,3 +31,13 @@ export default class Register extends React.Component {
   }
 
 }
+
+const mutation = gql`
+mutation($username: String!, $email: String!, $password: String!, $isAdmin: Boolean) {
+  register(username: $username, email: $email, password: $password, isAdmin: $isAdmin) {
+    id
+  }
+}
+`;
+
+export default graphql(mutation)(Register);
