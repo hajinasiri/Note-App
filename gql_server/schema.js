@@ -1,1 +1,5 @@
-schema.js
+export default `
+type Query {
+  hello: String!
+}
+`;
