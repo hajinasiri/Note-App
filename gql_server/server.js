@@ -27,4 +27,4 @@ app.use(
   graphqlExpress({ schema, context:{models}}),
 );
 
-app.listen(3000);
+models.sequelize.sync().then(() => app.listen(3000));
