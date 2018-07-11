@@ -7,12 +7,17 @@ import typeDefs from './schema';
 import resolvers from './resolvers';
 import models from './models';
 
+import cors from 'cors';
+
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
 
 const app = express();
+
+app.use(cors()); // enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
+
 
 app.use(
   '/graphiql',
@@ -27,4 +32,4 @@ app.use(
   graphqlExpress({ schema, context:{models}}),
 );
 
-models.sequelize.sync().then(() => app.listen(3000));
+models.sequelize.sync().then(() => app.listen(4000));

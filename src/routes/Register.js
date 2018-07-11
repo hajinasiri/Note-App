@@ -21,6 +21,7 @@ class Register extends React.Component {
     });
     console.log(response);
   }
+
   render() {
     return (
       <div>
@@ -42,6 +43,5 @@ mutation($username: String!, $email: String!, $password: String!, $isAdmin: Bool
   }
 }
 `;
-
 
 export default graphql(mutation)(Register);
