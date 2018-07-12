@@ -5,13 +5,16 @@ export default `
     username: String!
     createdAt: String!
     updatedAt: String!
+    password: String!
+    email: String!
   }
   type Query {
     allUsers: [User!]!
     getUser(username: String!): User
   }
   type Mutation {
-    createUser(username: String!): User
+    register(username: String!): User!
+    createUser(username: String!, password: String!, email: String!): User!
     updateUser(username: String!, newUsername: String!): [Int!]!
     deleteUser(username: String!): Int!
   }

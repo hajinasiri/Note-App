@@ -37,8 +37,8 @@ class Register extends React.Component {
 }
 
 const mutation = gql`
-mutation($username: String!, $email: String!, $password: String!, $isAdmin: Boolean) {
-  register(username: $username, email: $email, password: $password, isAdmin: $isAdmin) {
+mutation($username: String!, $email: String!, $password: String!) {
+  createUser(username: $username, email: $email, password: $password) {
     id
   }
 }
