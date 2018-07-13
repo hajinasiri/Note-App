@@ -10,7 +10,6 @@ export default {
   },
 
   Mutation: {
-    createUser: (parent, args, { models }) => models.User.create(args),
     updateUser: (parent, { username, newUsername }, { models }) =>
       models.User.update({ username: newUsername }, { where: { username } }),
     deleteUser: (parent, args, { models }) =>
