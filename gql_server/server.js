@@ -14,6 +14,8 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
+const SECRET = 'sdjfkdlkj453958ekjlk468094kj09';
+
 const app = express();
 
 app.use(cors()); // enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
@@ -23,6 +25,7 @@ app.use(
   '/graphiql',
   graphiqlExpress({
     endpointURL: '/graphql',
+    SECRET,
   }),
 );
 
