@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import SEC from '../secret.json';
 
 import typeDefs from './schema';
 import resolvers from './resolvers';
@@ -14,7 +15,7 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-const SECRET = 'sdjfkdlkj453958ekjlk468094kj09';
+const SECRET = SEC.SECRET;
 
 const app = express();
 
