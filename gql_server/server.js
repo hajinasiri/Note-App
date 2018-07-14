@@ -26,14 +26,13 @@ app.use(
   '/graphiql',
   graphiqlExpress({
     endpointURL: '/graphql',
-    SECRET,
   }),
 );
 
 app.use(
   '/graphql',
   bodyParser.json(),
-  graphqlExpress({ schema, context:{models}}),
+  graphqlExpress({ schema, context:{models,SECRET}}),
 );
 
 models.sequelize.sync().then(() => app.listen(4000));
