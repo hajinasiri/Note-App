@@ -5,12 +5,18 @@ import _ from 'lodash';
 export default {
   Query: {
     allUsers: (parent, args, { models }) => models.User.findAll(),
-    getUser: (parent, { username }, { models }) =>
-      models.User.findOne({
-        where: {
-          username,
-        },
-      }),
+    me: (parent, args, { models, user }) => {
+      if (user) {
+        // they are logged in
+        return models.User.findOne({
+          where: {
+            id: user.id,
+          },
+        });
+      }
+      // not logged in user
+      return null;
+    },
   },
 
   Mutation: {
@@ -26,6 +32,7 @@ export default {
 
     login: async (parent, { email, password }, { models, SECRET }) => {
       const user = await models.User.findOne({ where: { email } });
+      // console.log(user);
       if (!user) {
         throw new Error('Not user with that email');
       }
@@ -38,6 +45,8 @@ export default {
       // token = '12083098123414aslkjdasldf.asdhfaskjdh12982u793.asdlfjlaskdj10283491'
       // verify: needs secret | use me for authentication
       // decode: no secret | use me on the client side
+      const refreshToken = randtoken.uid(256);
+      console.log('refreshToken', refreshToken);
       const token = jwt.sign(
         {
           user: _.pick(user, ['id', 'username']),
@@ -47,11 +56,10 @@ export default {
           expiresIn: '1y',
         },
       );
+      console.log('--------------');
+      // console.log(token);
 
       return token;
     },
-
-
-
   },
 };

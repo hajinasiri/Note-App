@@ -18,6 +18,7 @@ const schema = makeExecutableSchema({
 
 //To get the token from header and verify it
 //The response {user} will be the data we passed in resolver meaninig user: _.pick(user, ['id', 'username'])
+//and we will pass it to the graphql request down in this file
 const addUser = async (req) => {
   const token = req.headers.authorization;
   try {
@@ -28,14 +29,15 @@ const addUser = async (req) => {
   }
   req.next();
 };
-app.use(addUser);
+
 
 const SECRET = SEC.SECRET;
 
 const app = express();
 
-app.use(cors()); // enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
 
+app.use(cors('*')); // enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
+app.use(addUser);
 
 app.use(
   '/graphiql',
