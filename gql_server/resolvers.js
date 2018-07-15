@@ -45,8 +45,7 @@ export default {
       // token = '12083098123414aslkjdasldf.asdhfaskjdh12982u793.asdlfjlaskdj10283491'
       // verify: needs secret | use me for authentication
       // decode: no secret | use me on the client side
-      const refreshToken = randtoken.uid(256);
-      console.log('refreshToken', refreshToken);
+
       const token = jwt.sign(
         {
           user: _.pick(user, ['id', 'username']),
