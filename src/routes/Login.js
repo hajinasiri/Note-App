@@ -5,7 +5,8 @@ import {graphql} from 'react-apollo';
 class Login extends React.Component {
   state = {
     email:'',
-    password:''
+    password:'',
+    token: "abc"
   }
 
   onChange = (e) => {
@@ -18,8 +19,12 @@ class Login extends React.Component {
     const response = await this.props.mutate({
       variables: this.state,
     });
-    console.log(response);
+    console.log(response.data);
+    const { token, refreshToken } = response.data.login;
+    localStorage.setItem('token', token);
+    localStorage.setItem('refreshToken', refreshToken);
   }
+
 
   render() {
     return (
@@ -35,10 +40,8 @@ class Login extends React.Component {
 }
 
 const mutation = gql`
-mutation($username: String!, $email: String!, $password: String!) {
-  createUser(username: $username, email: $email, password: $password) {
-    id
-  }
+mutation ($email: String!, $password: String!) {
+  login(email: $email, password: $password)
 }
 `;
 
