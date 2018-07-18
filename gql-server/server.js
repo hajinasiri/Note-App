@@ -16,6 +16,9 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
+
+const SECRET = SEC.SECRET;
+
 //To get the token from header and verify it
 //The response {user} will be the data we passed in resolver meaninig user: _.pick(user, ['id', 'username'])
 //and we will pass it to the graphql request down in this file
@@ -31,12 +34,8 @@ const addUser = async (req) => {
 };
 
 
-const SECRET = SEC.SECRET;
-
 const app = express();
-
-
-app.use(cors('*')); // enable `cors` to set HTTP response header: Access-Control-Allow-Origin: *
+app.use(cors('*'));
 app.use(addUser);
 
 app.use(
@@ -58,4 +57,6 @@ app.use(
     },
   })),
 );
+
 models.sequelize.sync().then(() => app.listen(4000));
+

@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import { requiresAuth, requiresAdmin } from './permissions';
 
 export default {
   Query: {
@@ -32,7 +33,6 @@ export default {
 
     login: async (parent, { email, password }, { models, SECRET }) => {
       const user = await models.User.findOne({ where: { email } });
-      // console.log(user);
       if (!user) {
         throw new Error('Not user with that email');
       }
@@ -45,7 +45,6 @@ export default {
       // token = '12083098123414aslkjdasldf.asdhfaskjdh12982u793.asdlfjlaskdj10283491'
       // verify: needs secret | use me for authentication
       // decode: no secret | use me on the client side
-
       const token = jwt.sign(
         {
           user: _.pick(user, ['id', 'username']),
@@ -55,8 +54,6 @@ export default {
           expiresIn: '1y',
         },
       );
-      console.log('--------------');
-      // console.log(token);
 
       return token;
     },
