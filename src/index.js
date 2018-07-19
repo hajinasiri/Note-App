@@ -10,30 +10,6 @@ import Routes from './routes';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-
-
-
-
-// const link = new HttpLink( {uri:'http://localhost:4000/graphql'} );
-
-// link.use([{
-//   applyMiddleware(req, next) {
-//     if (!req.options.headers) {
-//       req.options.headers = {};
-//     }
-//     req.options.headers['x-token'] = localStorage.getItem('token');
-//     next();
-//   }
-// }]);
-
-// const client = new ApolloClient({
-//   link: link,
-//   cache: new InMemoryCache()
-// })
-
-
-
-
 const httpLink = new HttpLink( {uri:'http://localhost:4000/graphql'} );
 
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -51,10 +27,6 @@ const client = new ApolloClient({
   link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache(),
 });
-
-
-
-
 
 
  const App = () => (
