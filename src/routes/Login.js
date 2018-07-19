@@ -20,9 +20,8 @@ class Login extends React.Component {
       variables: this.state,
     });
     console.log(response.data);
-    const { token, refreshToken } = response.data.login;
+    const token = response.data.login;
     localStorage.setItem('token', token);
-    localStorage.setItem('refreshToken', refreshToken);
   }
 
 
