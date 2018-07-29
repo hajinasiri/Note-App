@@ -34,8 +34,15 @@ const addUser = async (req) => {
 };
 
 
+// enable cors for authentication
+var corsOptions = {
+  origin: '<http://localhost:3002/>',
+  credentials: true // <-- REQUIRED backend setting
+};
 const app = express();
+
 app.use(cors('*'));
+
 app.use(addUser);
 
 app.use(

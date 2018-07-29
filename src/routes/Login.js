@@ -19,11 +19,13 @@ class Login extends React.Component {
     const response = await this.props.mutate({
       variables: this.state,
     });
-    console.log(response.data);
     const token = response.data.login;
     localStorage.setItem('token', token);
   }
 
+  onLogOut = () => {
+        localStorage.setItem('token', '');
+  }
 
   render() {
     return (
@@ -32,6 +34,7 @@ class Login extends React.Component {
         <input name='password' placeholder='Password' type='password' onChange={e => this.onChange(e)} value={this.state.password} />
         <br/>
         <button onClick={() => this.onSubmit()} type='primary' > Login </button>
+        <button onClick={() => this.onLogOut()} type='primary' > empty localStorage </button>
       </div>
     )
   }
